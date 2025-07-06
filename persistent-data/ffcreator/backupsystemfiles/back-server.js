@@ -12,8 +12,6 @@ const path = require('path');
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const winston = require('winston');
-// Add this line after your existing requires
-const {initializeTemplateService, setupTemplateRoutes, setupTemplateJobProcessors} = require('./routes/templateRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -38,7 +36,7 @@ async function getJwtSecret() {
 
 // Unified logging configuration
 function initializeLogging() {
-  const logLevel = process.env.LOG_LEVEL || 'debug';
+  const logLevel = process.env.LOG_LEVEL || 'info';
   const logFile = process.env.LOG_FILE;
   
   const transports = [
@@ -460,7 +458,6 @@ app.get('/health', async (req, res) => {
       },
       redis: redisStatus === 'PONG' ? 'connected' : 'disconnected',
       gpu: hasGpu ? 'RTX 3080 available' : 'CPU fallback',
-      templates: 'Native mobile templates enabled',
       memory: process.memoryUsage(),
       uptime: process.uptime()
     });
@@ -563,33 +560,16 @@ async function startServer() {
     
     console.log('🔧 Initializing database schema...');
     await initDatabaseSchema();
-
-    console.log('🔧 Initializing template service...');
-    const templateService = initializeTemplateService(logger, {
-      CACHE_DIR,
-      OUTPUT_DIR,
-      ASSETS_DIR,
-      TTS_DIR
-    });
-  
+    
     console.log('🔧 Initializing job processing...');
     initializeJobProcessing();
     
-    // ADD THESE TWO LINES - Setup template job processors
-    console.log('🔧 Setting up template job processors...');
-    setupTemplateJobProcessors(videoQueue, templateService, pool, OUTPUT_DIR);
-
-    // ADD THESE TWO LINES - Setup template routes  
-    console.log('🔧 Setting up template routes...');
-    setupTemplateRoutes(app, templateService, pool, videoQueue);
-
     console.log('🔧 Starting HTTP server...');
     app.listen(PORT, '0.0.0.0', () => {
       console.log(`🚀 FFCreator GPU API server running on port ${PORT}`);
       console.log(`🎮 GPU: RTX 3080 acceleration enabled`);
       console.log(`🗄️  Database: Connected to PostgreSQL`);
       console.log(`🔄 Redis: Connected for job queuing`);
-      console.log(`📱 Templates: Mobile templates enabled`);
       console.log(`🏥 Health check: http://localhost:${PORT}/health`);
       console.log(`✅ All services initialized successfully`);
     });

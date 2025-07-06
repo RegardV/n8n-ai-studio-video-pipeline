@@ -89,8 +89,6 @@ WORKDIR /app
 
 # Copy package files with proper ownership to existing node user
 COPY --chown=node:node package*.json ./
-COPY --chown=node:node routes/ ./routes/
-COPY --chown=node:node templates/ ./templates/
 
 # =============================================================================
 # DEPENDENCY INSTALLATION
