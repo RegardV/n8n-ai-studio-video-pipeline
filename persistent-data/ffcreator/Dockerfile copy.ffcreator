@@ -1,0 +1,222 @@
+# =============================================================================
+# FFCreator GPU-Accelerated Video Processing - Production Dockerfile
+# =============================================================================
+# Updated for Docker secrets integration and enhanced security
+# Compatible with the new secure Docker Compose configuration
+# =============================================================================
+
+# Use Ubuntu-based Node image to avoid Alpine/musl issues
+FROM node:18-bullseye
+
+# Prevent interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# =============================================================================
+# SYSTEM DEPENDENCIES INSTALLATION
+# =============================================================================
+# Install all required system packages for GPU-accelerated video processing
+RUN apt-get update && apt-get install -y \
+    # Graphics and OpenGL libraries
+    libgl1-mesa-glx \
+    libglu1-mesa \
+    libglx0 \
+    libxrender1 \
+    libxext6 \
+    libx11-6 \
+    xvfb \
+    x11-xserver-utils \
+    mesa-utils \
+    \
+    # FFmpeg and media libraries
+    ffmpeg \
+    \
+    # Build tools for native modules
+    build-essential \
+    python3 \
+    python3-pip \
+    \
+    # Canvas and Cairo dependencies
+    libcairo2-dev \
+    libpango1.0-dev \
+    libjpeg-dev \
+    libgif-dev \
+    librsvg2-dev \
+    \
+    # Additional utilities for production
+    curl \
+    wget \
+    unzip \
+    \
+    # Health check tools
+    netcat-openbsd \
+    \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# =============================================================================
+# ENVIRONMENT CONFIGURATION
+# =============================================================================
+# Set display environment for headless OpenGL rendering
+ENV DISPLAY=:99
+ENV NVIDIA_VISIBLE_DEVICES=0
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility,video,graphics
+
+# OpenGL optimization settings
+ENV __GL_SYNC_TO_VBLANK=0
+ENV __GL_SYNC_DISPLAY_DEVICE=DP-0
+ENV LIBGL_ALWAYS_INDIRECT=0
+
+# Node.js production optimizations
+ENV NODE_ENV=production
+ENV NODE_OPTIONS=--max-old-space-size=8192
+
+# FFCreator optimization settings
+ENV FFCREATOR_PARALLEL_JOBS=2
+ENV FFCREATOR_WORKER_THREADS=8
+ENV FFCREATOR_CACHE_SIZE=2048
+
+# =============================================================================
+# APPLICATION SETUP
+# =============================================================================
+# Create non-root user for security
+RUN groupadd -r ffcreator && useradd -r -g ffcreator ffcreator
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files first for better Docker layer caching
+COPY package*.json ./
+
+# Install Node.js dependencies
+RUN npm install --omit=dev \
+    && npm cache clean --force \
+    && chown -R ffcreator:ffcreator /app
+
+# Copy application code
+COPY --chown=ffcreator:ffcreator server.js ./
+
+# =============================================================================
+# DIRECTORY STRUCTURE CREATION
+# =============================================================================
+# Create all required directories with proper permissions
+RUN mkdir -p \
+    /app/videos \
+    /app/cache \
+    /app/temp \
+    /app/assets \
+    /app/ai-assets \
+    /app/tts-audio \
+    /app/logs \
+    && chown -R ffcreator:ffcreator /app
+
+# =============================================================================
+# HEALTH CHECK CONFIGURATION
+# =============================================================================
+# Add health check for container monitoring
+HEALTHCHECK --interval=60s --timeout=30s --start-period=120s --retries=3 \
+    CMD curl -f http://localhost:3001/health || exit 1
+
+# =============================================================================
+# SECURITY CONFIGURATION
+# =============================================================================
+# Switch to non-root user
+USER ffcreator
+
+# Expose application port (internal only - no external access)
+EXPOSE 3001
+
+# =============================================================================
+# STARTUP SCRIPT WITH ENHANCED ERROR HANDLING
+# =============================================================================
+# Enhanced startup script with proper error handling and logging
+CMD ["sh", "-c", "\
+  echo '🚀 Starting FFCreator GPU Service...' && \
+  echo '📊 System Information:' && \
+  echo '  - Node.js: $(node --version)' && \
+  echo '  - NPM: $(npm --version)' && \
+  echo '  - User: $(whoami)' && \
+  echo '  - Working Directory: $(pwd)' && \
+  echo '  - Available Memory: $(free -h | grep Mem | awk \"{print \\$2}\")' && \
+  echo '  - CPU Cores: $(nproc)' && \
+  \
+  echo '🎮 GPU Information:' && \
+  nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader 2>/dev/null || echo '  - GPU info not available (may be expected in some environments)' && \
+  \
+  echo '🖥️  Starting virtual display server...' && \
+  Xvfb :99 -screen 0 1920x1080x24 -ac +extension GLX +extension RENDER -noreset -dpi 96 > /dev/null 2>&1 & \
+  XVFB_PID=$! && \
+  echo \"  - Xvfb started with PID: $XVFB_PID\" && \
+  \
+  echo '⏳ Waiting for display server...' && \
+  sleep 5 && \
+  \
+  echo '🔧 Testing OpenGL context...' && \
+  timeout 10 sh -c 'DISPLAY=:99 glxinfo | head -5' 2>/dev/null || echo '  - OpenGL context test completed (may show warnings in container environments)' && \
+  \
+  echo '🔍 Verifying application files...' && \
+  ls -la /app/ && \
+  \
+  echo '🔐 Checking Docker secrets access...' && \
+  ls -la /run/secrets/ 2>/dev/null || echo '  - No secrets mounted (may be expected in development)' && \
+  \
+  echo '📁 Verifying mounted volumes...' && \
+  ls -la /app/videos/ /app/cache/ /app/ai-assets/ /app/tts-audio/ 2>/dev/null || echo '  - Some volumes may not be mounted yet' && \
+  \
+  echo '🌐 Testing network connectivity...' && \
+  timeout 5 nc -z redis-cache 6379 2>/dev/null && echo '  - Redis connection: ✅' || echo '  - Redis connection: ⏳ (will retry)' && \
+  timeout 5 nc -z ffcreator-db 5432 2>/dev/null && echo '  - Database connection: ✅' || echo '  - Database connection: ⏳ (will retry)' && \
+  \
+  echo '🚀 Starting FFCreator API server...' && \
+  echo '  - Port: 3001' && \
+  echo '  - Environment: $NODE_ENV' && \
+  echo '  - Memory Limit: $NODE_OPTIONS' && \
+  echo '  - GPU Device: $NVIDIA_VISIBLE_DEVICES' && \
+  echo '📝 Server logs will appear below:' && \
+  echo '=============================================' && \
+  \
+  trap 'echo \"🛑 Shutting down FFCreator service...\"; kill $XVFB_PID 2>/dev/null; exit 0' TERM INT && \
+  \
+  node server.js \
+"]
+
+# =============================================================================
+# DOCKERFILE METADATA
+# =============================================================================
+LABEL maintainer="N8N AI Studio Team"
+LABEL version="2.0.0"
+LABEL description="GPU-accelerated FFCreator video processing service with Docker secrets support"
+LABEL gpu.required="true"
+LABEL security.level="production"
+
+# =============================================================================
+# PRODUCTION DEPLOYMENT NOTES:
+# =============================================================================
+# 
+# 🔐 SECURITY FEATURES:
+# ✅ Non-root user execution
+# ✅ Docker secrets integration ready
+# ✅ Minimal attack surface
+# ✅ Health check monitoring
+# ✅ Proper file permissions
+# 
+# 🎮 GPU OPTIMIZATIONS:
+# ✅ NVIDIA runtime compatibility
+# ✅ OpenGL acceleration
+# ✅ Virtual display for headless rendering
+# ✅ Memory optimization for video processing
+# 
+# 📊 MONITORING & DEBUGGING:
+# ✅ Comprehensive startup logging
+# ✅ Network connectivity tests
+# ✅ GPU status verification
+# ✅ Volume mount verification
+# ✅ Graceful shutdown handling
+# 
+# 🔧 INTEGRATION POINTS:
+# ✅ Redis connectivity for job queues
+# ✅ PostgreSQL connectivity for job tracking
+# ✅ ComfyUI integration for AI assets
+# ✅ Kokoro TTS integration for audio
+# ✅ Docker secrets for secure credential management
+# 
+# =============================================================================

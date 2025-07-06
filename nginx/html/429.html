@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Limited - N8N AI Studio</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 50px 20px;
+            min-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #ff6b6b;
+        }
+        .error-code {
+            font-size: 6em;
+            font-weight: bold;
+            margin: 20px 0;
+            opacity: 0.7;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .retry-info {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .back-button {
+            display: inline-block;
+            background: #4ecdc4;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        .back-button:hover {
+            background: #45b7aa;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="error-code">429</div>
+        <h1>Rate Limited</h1>
+        <p>You've made too many requests to our AI services. Please wait before making additional requests.</p>
+        
+        <div class="retry-info">
+            <strong>Rate Limits:</strong><br>
+            • Web Interface: 30 requests/minute<br>
+            • AI APIs: 10 requests/minute<br>
+            • Video Processing: 2 requests/minute
+        </div>
+        
+        <p>If you believe this is an error or need higher limits, please Cry Louder</p>
+        
+        <a href="/" class="back-button">← Back to N8N AI Studio</a>
+    </div>
+    
+    <script>
+        // Auto-retry after 60 seconds
+        setTimeout(() => {
+            window.location.href = '/';
+        }, 60000);
+    </script>
+</body>
+</html>

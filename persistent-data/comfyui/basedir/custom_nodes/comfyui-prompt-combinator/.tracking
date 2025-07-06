@@ -1,0 +1,302 @@
+.github/workflows/publish.yml
+.gitignore
+LICENSE
+README.md
+__init__.py
+example/example_files/img-black and white-3d render-airplane-book----.webp
+example/example_files/img-black and white-3d render-airplane-flying----.webp
+example/example_files/img-black and white-3d render-airplane-icecream----.webp
+example/example_files/img-black and white-3d render-airplane-umbrella----.webp
+example/example_files/img-black and white-3d render-dog-book----.webp
+example/example_files/img-black and white-3d render-dog-flying----.webp
+example/example_files/img-black and white-3d render-dog-icecream----.webp
+example/example_files/img-black and white-3d render-dog-umbrella----.webp
+example/example_files/img-black and white-3d render-man-book----.webp
+example/example_files/img-black and white-3d render-man-flying----.webp
+example/example_files/img-black and white-3d render-man-icecream----.webp
+example/example_files/img-black and white-3d render-man-umbrella----.webp
+example/example_files/img-black and white-3d render-monster-book----.webp
+example/example_files/img-black and white-3d render-monster-flying----.webp
+example/example_files/img-black and white-3d render-monster-icecream----.webp
+example/example_files/img-black and white-3d render-monster-umbrella----.webp
+example/example_files/img-black and white-blueprint-airplane-book----.webp
+example/example_files/img-black and white-blueprint-airplane-flying----.webp
+example/example_files/img-black and white-blueprint-airplane-icecream----.webp
+example/example_files/img-black and white-blueprint-airplane-umbrella----.webp
+example/example_files/img-black and white-blueprint-dog-book----.webp
+example/example_files/img-black and white-blueprint-dog-flying----.webp
+example/example_files/img-black and white-blueprint-dog-icecream----.webp
+example/example_files/img-black and white-blueprint-dog-umbrella----.webp
+example/example_files/img-black and white-blueprint-man-book----.webp
+example/example_files/img-black and white-blueprint-man-flying----.webp
+example/example_files/img-black and white-blueprint-man-icecream----.webp
+example/example_files/img-black and white-blueprint-man-umbrella----.webp
+example/example_files/img-black and white-blueprint-monster-book----.webp
+example/example_files/img-black and white-blueprint-monster-flying----.webp
+example/example_files/img-black and white-blueprint-monster-icecream----.webp
+example/example_files/img-black and white-blueprint-monster-umbrella----.webp
+example/example_files/img-black and white-cartoon-airplane-book----.webp
+example/example_files/img-black and white-cartoon-airplane-flying----.webp
+example/example_files/img-black and white-cartoon-airplane-icecream----.webp
+example/example_files/img-black and white-cartoon-airplane-umbrella----.webp
+example/example_files/img-black and white-cartoon-dog-book----.webp
+example/example_files/img-black and white-cartoon-dog-flying----.webp
+example/example_files/img-black and white-cartoon-dog-icecream----.webp
+example/example_files/img-black and white-cartoon-dog-umbrella----.webp
+example/example_files/img-black and white-cartoon-man-book----.webp
+example/example_files/img-black and white-cartoon-man-flying----.webp
+example/example_files/img-black and white-cartoon-man-icecream----.webp
+example/example_files/img-black and white-cartoon-man-umbrella----.webp
+example/example_files/img-black and white-cartoon-monster-book----.webp
+example/example_files/img-black and white-cartoon-monster-flying----.webp
+example/example_files/img-black and white-cartoon-monster-icecream----.webp
+example/example_files/img-black and white-cartoon-monster-umbrella----.webp
+example/example_files/img-black and white-pencil-airplane-book----.webp
+example/example_files/img-black and white-pencil-airplane-flying----.webp
+example/example_files/img-black and white-pencil-airplane-icecream----.webp
+example/example_files/img-black and white-pencil-airplane-umbrella----.webp
+example/example_files/img-black and white-pencil-dog-book----.webp
+example/example_files/img-black and white-pencil-dog-flying----.webp
+example/example_files/img-black and white-pencil-dog-icecream----.webp
+example/example_files/img-black and white-pencil-dog-umbrella----.webp
+example/example_files/img-black and white-pencil-man-book----.webp
+example/example_files/img-black and white-pencil-man-flying----.webp
+example/example_files/img-black and white-pencil-man-icecream----.webp
+example/example_files/img-black and white-pencil-man-umbrella----.webp
+example/example_files/img-black and white-pencil-monster-book----.webp
+example/example_files/img-black and white-pencil-monster-flying----.webp
+example/example_files/img-black and white-pencil-monster-icecream----.webp
+example/example_files/img-black and white-pencil-monster-umbrella----.webp
+example/example_files/img-black and white-picture-airplane-book----.webp
+example/example_files/img-black and white-picture-airplane-flying----.webp
+example/example_files/img-black and white-picture-airplane-icecream----.webp
+example/example_files/img-black and white-picture-airplane-umbrella----.webp
+example/example_files/img-black and white-picture-dog-book----.webp
+example/example_files/img-black and white-picture-dog-flying----.webp
+example/example_files/img-black and white-picture-dog-icecream----.webp
+example/example_files/img-black and white-picture-dog-umbrella----.webp
+example/example_files/img-black and white-picture-man-book----.webp
+example/example_files/img-black and white-picture-man-flying----.webp
+example/example_files/img-black and white-picture-man-icecream----.webp
+example/example_files/img-black and white-picture-man-umbrella----.webp
+example/example_files/img-black and white-picture-monster-book----.webp
+example/example_files/img-black and white-picture-monster-flying----.webp
+example/example_files/img-black and white-picture-monster-icecream----.webp
+example/example_files/img-black and white-picture-monster-umbrella----.webp
+example/example_files/img-black and white-watercolor-airplane-book----.webp
+example/example_files/img-black and white-watercolor-airplane-flying----.webp
+example/example_files/img-black and white-watercolor-airplane-icecream----.webp
+example/example_files/img-black and white-watercolor-airplane-umbrella----.webp
+example/example_files/img-black and white-watercolor-dog-book----.webp
+example/example_files/img-black and white-watercolor-dog-flying----.webp
+example/example_files/img-black and white-watercolor-dog-icecream----.webp
+example/example_files/img-black and white-watercolor-dog-umbrella----.webp
+example/example_files/img-black and white-watercolor-man-book----.webp
+example/example_files/img-black and white-watercolor-man-flying----.webp
+example/example_files/img-black and white-watercolor-man-icecream----.webp
+example/example_files/img-black and white-watercolor-man-umbrella----.webp
+example/example_files/img-black and white-watercolor-monster-book----.webp
+example/example_files/img-black and white-watercolor-monster-flying----.webp
+example/example_files/img-black and white-watercolor-monster-icecream----.webp
+example/example_files/img-black and white-watercolor-monster-umbrella----.webp
+example/example_files/img-colorful-3d render-airplane-book----.webp
+example/example_files/img-colorful-3d render-airplane-flying----.webp
+example/example_files/img-colorful-3d render-airplane-icecream----.webp
+example/example_files/img-colorful-3d render-airplane-umbrella----.webp
+example/example_files/img-colorful-3d render-dog-book----.webp
+example/example_files/img-colorful-3d render-dog-flying----.webp
+example/example_files/img-colorful-3d render-dog-icecream----.webp
+example/example_files/img-colorful-3d render-dog-umbrella----.webp
+example/example_files/img-colorful-3d render-man-book----.webp
+example/example_files/img-colorful-3d render-man-flying----.webp
+example/example_files/img-colorful-3d render-man-icecream----.webp
+example/example_files/img-colorful-3d render-man-umbrella----.webp
+example/example_files/img-colorful-3d render-monster-book----.webp
+example/example_files/img-colorful-3d render-monster-flying----.webp
+example/example_files/img-colorful-3d render-monster-icecream----.webp
+example/example_files/img-colorful-3d render-monster-umbrella----.webp
+example/example_files/img-colorful-blueprint-airplane-book----.webp
+example/example_files/img-colorful-blueprint-airplane-flying----.webp
+example/example_files/img-colorful-blueprint-airplane-icecream----.webp
+example/example_files/img-colorful-blueprint-airplane-umbrella----.webp
+example/example_files/img-colorful-blueprint-dog-book----.webp
+example/example_files/img-colorful-blueprint-dog-flying----.webp
+example/example_files/img-colorful-blueprint-dog-icecream----.webp
+example/example_files/img-colorful-blueprint-dog-umbrella----.webp
+example/example_files/img-colorful-blueprint-man-book----.webp
+example/example_files/img-colorful-blueprint-man-flying----.webp
+example/example_files/img-colorful-blueprint-man-icecream----.webp
+example/example_files/img-colorful-blueprint-man-umbrella----.webp
+example/example_files/img-colorful-blueprint-monster-book----.webp
+example/example_files/img-colorful-blueprint-monster-flying----.webp
+example/example_files/img-colorful-blueprint-monster-icecream----.webp
+example/example_files/img-colorful-blueprint-monster-umbrella----.webp
+example/example_files/img-colorful-cartoon-airplane-book----.webp
+example/example_files/img-colorful-cartoon-airplane-flying----.webp
+example/example_files/img-colorful-cartoon-airplane-icecream----.webp
+example/example_files/img-colorful-cartoon-airplane-umbrella----.webp
+example/example_files/img-colorful-cartoon-dog-book----.webp
+example/example_files/img-colorful-cartoon-dog-flying----.webp
+example/example_files/img-colorful-cartoon-dog-icecream----.webp
+example/example_files/img-colorful-cartoon-dog-umbrella----.webp
+example/example_files/img-colorful-cartoon-man-book----.webp
+example/example_files/img-colorful-cartoon-man-flying----.webp
+example/example_files/img-colorful-cartoon-man-icecream----.webp
+example/example_files/img-colorful-cartoon-man-umbrella----.webp
+example/example_files/img-colorful-cartoon-monster-book----.webp
+example/example_files/img-colorful-cartoon-monster-flying----.webp
+example/example_files/img-colorful-cartoon-monster-icecream----.webp
+example/example_files/img-colorful-cartoon-monster-umbrella----.webp
+example/example_files/img-colorful-pencil-airplane-book----.webp
+example/example_files/img-colorful-pencil-airplane-flying----.webp
+example/example_files/img-colorful-pencil-airplane-icecream----.webp
+example/example_files/img-colorful-pencil-airplane-umbrella----.webp
+example/example_files/img-colorful-pencil-dog-book----.webp
+example/example_files/img-colorful-pencil-dog-flying----.webp
+example/example_files/img-colorful-pencil-dog-icecream----.webp
+example/example_files/img-colorful-pencil-dog-umbrella----.webp
+example/example_files/img-colorful-pencil-man-book----.webp
+example/example_files/img-colorful-pencil-man-flying----.webp
+example/example_files/img-colorful-pencil-man-icecream----.webp
+example/example_files/img-colorful-pencil-man-umbrella----.webp
+example/example_files/img-colorful-pencil-monster-book----.webp
+example/example_files/img-colorful-pencil-monster-flying----.webp
+example/example_files/img-colorful-pencil-monster-icecream----.webp
+example/example_files/img-colorful-pencil-monster-umbrella----.webp
+example/example_files/img-colorful-picture-airplane-book----.webp
+example/example_files/img-colorful-picture-airplane-flying----.webp
+example/example_files/img-colorful-picture-airplane-icecream----.webp
+example/example_files/img-colorful-picture-airplane-umbrella----.webp
+example/example_files/img-colorful-picture-dog-book----.webp
+example/example_files/img-colorful-picture-dog-flying----.webp
+example/example_files/img-colorful-picture-dog-icecream----.webp
+example/example_files/img-colorful-picture-dog-umbrella----.webp
+example/example_files/img-colorful-picture-man-book----.webp
+example/example_files/img-colorful-picture-man-flying----.webp
+example/example_files/img-colorful-picture-man-icecream----.webp
+example/example_files/img-colorful-picture-man-umbrella----.webp
+example/example_files/img-colorful-picture-monster-book----.webp
+example/example_files/img-colorful-picture-monster-flying----.webp
+example/example_files/img-colorful-picture-monster-icecream----.webp
+example/example_files/img-colorful-picture-monster-umbrella----.webp
+example/example_files/img-colorful-watercolor-airplane-book----.webp
+example/example_files/img-colorful-watercolor-airplane-flying----.webp
+example/example_files/img-colorful-watercolor-airplane-icecream----.webp
+example/example_files/img-colorful-watercolor-airplane-umbrella----.webp
+example/example_files/img-colorful-watercolor-dog-book----.webp
+example/example_files/img-colorful-watercolor-dog-flying----.webp
+example/example_files/img-colorful-watercolor-dog-icecream----.webp
+example/example_files/img-colorful-watercolor-dog-umbrella----.webp
+example/example_files/img-colorful-watercolor-man-book----.webp
+example/example_files/img-colorful-watercolor-man-flying----.webp
+example/example_files/img-colorful-watercolor-man-icecream----.webp
+example/example_files/img-colorful-watercolor-man-umbrella----.webp
+example/example_files/img-colorful-watercolor-monster-book----.webp
+example/example_files/img-colorful-watercolor-monster-flying----.webp
+example/example_files/img-colorful-watercolor-monster-icecream----.webp
+example/example_files/img-colorful-watercolor-monster-umbrella----.webp
+example/example_files/img-psychedelic-3d render-airplane-book----.webp
+example/example_files/img-psychedelic-3d render-airplane-flying----.webp
+example/example_files/img-psychedelic-3d render-airplane-icecream----.webp
+example/example_files/img-psychedelic-3d render-airplane-umbrella----.webp
+example/example_files/img-psychedelic-3d render-dog-book----.webp
+example/example_files/img-psychedelic-3d render-dog-flying----.webp
+example/example_files/img-psychedelic-3d render-dog-icecream----.webp
+example/example_files/img-psychedelic-3d render-dog-umbrella----.webp
+example/example_files/img-psychedelic-3d render-man-book----.webp
+example/example_files/img-psychedelic-3d render-man-flying----.webp
+example/example_files/img-psychedelic-3d render-man-icecream----.webp
+example/example_files/img-psychedelic-3d render-man-umbrella----.webp
+example/example_files/img-psychedelic-3d render-monster-book----.webp
+example/example_files/img-psychedelic-3d render-monster-flying----.webp
+example/example_files/img-psychedelic-3d render-monster-icecream----.webp
+example/example_files/img-psychedelic-3d render-monster-umbrella----.webp
+example/example_files/img-psychedelic-blueprint-airplane-book----.webp
+example/example_files/img-psychedelic-blueprint-airplane-flying----.webp
+example/example_files/img-psychedelic-blueprint-airplane-icecream----.webp
+example/example_files/img-psychedelic-blueprint-airplane-umbrella----.webp
+example/example_files/img-psychedelic-blueprint-dog-book----.webp
+example/example_files/img-psychedelic-blueprint-dog-flying----.webp
+example/example_files/img-psychedelic-blueprint-dog-icecream----.webp
+example/example_files/img-psychedelic-blueprint-dog-umbrella----.webp
+example/example_files/img-psychedelic-blueprint-man-book----.webp
+example/example_files/img-psychedelic-blueprint-man-flying----.webp
+example/example_files/img-psychedelic-blueprint-man-icecream----.webp
+example/example_files/img-psychedelic-blueprint-man-umbrella----.webp
+example/example_files/img-psychedelic-blueprint-monster-book----.webp
+example/example_files/img-psychedelic-blueprint-monster-flying----.webp
+example/example_files/img-psychedelic-blueprint-monster-icecream----.webp
+example/example_files/img-psychedelic-blueprint-monster-umbrella----.webp
+example/example_files/img-psychedelic-cartoon-airplane-book----.webp
+example/example_files/img-psychedelic-cartoon-airplane-flying----.webp
+example/example_files/img-psychedelic-cartoon-airplane-icecream----.webp
+example/example_files/img-psychedelic-cartoon-airplane-umbrella----.webp
+example/example_files/img-psychedelic-cartoon-dog-book----.webp
+example/example_files/img-psychedelic-cartoon-dog-flying----.webp
+example/example_files/img-psychedelic-cartoon-dog-icecream----.webp
+example/example_files/img-psychedelic-cartoon-dog-umbrella----.webp
+example/example_files/img-psychedelic-cartoon-man-book----.webp
+example/example_files/img-psychedelic-cartoon-man-flying----.webp
+example/example_files/img-psychedelic-cartoon-man-icecream----.webp
+example/example_files/img-psychedelic-cartoon-man-umbrella----.webp
+example/example_files/img-psychedelic-cartoon-monster-book----.webp
+example/example_files/img-psychedelic-cartoon-monster-flying----.webp
+example/example_files/img-psychedelic-cartoon-monster-icecream----.webp
+example/example_files/img-psychedelic-cartoon-monster-umbrella----.webp
+example/example_files/img-psychedelic-pencil-airplane-book----.webp
+example/example_files/img-psychedelic-pencil-airplane-flying----.webp
+example/example_files/img-psychedelic-pencil-airplane-icecream----.webp
+example/example_files/img-psychedelic-pencil-airplane-umbrella----.webp
+example/example_files/img-psychedelic-pencil-dog-book----.webp
+example/example_files/img-psychedelic-pencil-dog-flying----.webp
+example/example_files/img-psychedelic-pencil-dog-icecream----.webp
+example/example_files/img-psychedelic-pencil-dog-umbrella----.webp
+example/example_files/img-psychedelic-pencil-man-book----.webp
+example/example_files/img-psychedelic-pencil-man-flying----.webp
+example/example_files/img-psychedelic-pencil-man-icecream----.webp
+example/example_files/img-psychedelic-pencil-man-umbrella----.webp
+example/example_files/img-psychedelic-pencil-monster-book----.webp
+example/example_files/img-psychedelic-pencil-monster-flying----.webp
+example/example_files/img-psychedelic-pencil-monster-icecream----.webp
+example/example_files/img-psychedelic-pencil-monster-umbrella----.webp
+example/example_files/img-psychedelic-picture-airplane-book----.webp
+example/example_files/img-psychedelic-picture-airplane-flying----.webp
+example/example_files/img-psychedelic-picture-airplane-icecream----.webp
+example/example_files/img-psychedelic-picture-airplane-umbrella----.webp
+example/example_files/img-psychedelic-picture-dog-book----.webp
+example/example_files/img-psychedelic-picture-dog-flying----.webp
+example/example_files/img-psychedelic-picture-dog-icecream----.webp
+example/example_files/img-psychedelic-picture-dog-umbrella----.webp
+example/example_files/img-psychedelic-picture-man-book----.webp
+example/example_files/img-psychedelic-picture-man-flying----.webp
+example/example_files/img-psychedelic-picture-man-icecream----.webp
+example/example_files/img-psychedelic-picture-man-umbrella----.webp
+example/example_files/img-psychedelic-picture-monster-book----.webp
+example/example_files/img-psychedelic-picture-monster-flying----.webp
+example/example_files/img-psychedelic-picture-monster-icecream----.webp
+example/example_files/img-psychedelic-picture-monster-umbrella----.webp
+example/example_files/img-psychedelic-watercolor-airplane-book----.webp
+example/example_files/img-psychedelic-watercolor-airplane-flying----.webp
+example/example_files/img-psychedelic-watercolor-airplane-icecream----.webp
+example/example_files/img-psychedelic-watercolor-airplane-umbrella----.webp
+example/example_files/img-psychedelic-watercolor-dog-book----.webp
+example/example_files/img-psychedelic-watercolor-dog-flying----.webp
+example/example_files/img-psychedelic-watercolor-dog-icecream----.webp
+example/example_files/img-psychedelic-watercolor-dog-umbrella----.webp
+example/example_files/img-psychedelic-watercolor-man-book----.webp
+example/example_files/img-psychedelic-watercolor-man-flying----.webp
+example/example_files/img-psychedelic-watercolor-man-icecream----.webp
+example/example_files/img-psychedelic-watercolor-man-umbrella----.webp
+example/example_files/img-psychedelic-watercolor-monster-book----.webp
+example/example_files/img-psychedelic-watercolor-monster-flying----.webp
+example/example_files/img-psychedelic-watercolor-monster-icecream----.webp
+example/example_files/img-psychedelic-watercolor-monster-umbrella----.webp
+example/index.html
+example_embedded/index.html
+example_workflows/promptcombinator.jpg
+example_workflows/promptcombinator.json
+html.template
+html_embedded.template
+prompt_combinator.py
+promptcombinator.png
+pyproject.toml

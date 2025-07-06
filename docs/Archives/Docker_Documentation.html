@@ -1,0 +1,616 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Commands Reference - N8N AI Studio Project</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    <style>
+        .command-box {
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            border-left: 4px solid #10b981;
+        }
+        .category-header {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+        .description-box {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+        }
+        body {
+            print-color-adjust: exact;
+            -webkit-print-color-adjust: exact;
+        }
+         {
+            body { font-size: 12px; }
+            .command-box { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-8 px-6">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-4xl font-bold mb-2">
+                <i class="fab fa-docker mr-3"></i>Docker Commands Reference Guide
+            </h1>
+            <p class="text-xl opacity-90">N8N AI Studio Project - Complete Docker Command Documentation</p>
+            <div class="mt-4 text-sm opacity-80">
+                <i class="fas fa-calendar-alt mr-2"></i>Project Documentation | FFCreator API Implementation
+            </div>
+        </div>
+    </header>
+
+    <!-- Overview Section -->
+    <section class="max-w-7xl mx-auto px-6 py-8">
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">
+                <i class="fas fa-info-circle text-blue-600 mr-2"></i>Project Overview
+            </h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="description-box rounded-lg p-4">
+                    <h3 class="font-semibold text-lg mb-2">Services Managed</h3>
+                    <ul class="space-y-1 text-sm">
+                        <li><i class="fas fa-server text-green-600 mr-2"></i>nginx-proxy (Reverse Proxy)</li>
+                        <li><i class="fas fa-cogs text-blue-600 mr-2"></i>n8n-main (Workflow Automation)</li>
+                        <li><i class="fas fa-image text-purple-600 mr-2"></i>comfyui-main (AI Image Generation)</li>
+                        <li><i class="fas fa-video text-red-600 mr-2"></i>ffcreator-service (Video Processing)</li>
+                        <li><i class="fas fa-microphone text-yellow-600 mr-2"></i>kokoro-tts-service (Text-to-Speech)</li>
+                        <li><i class="fas fa-database text-gray-600 mr-2"></i>postgres & redis</li>
+                    </ul>
+                </div>
+                <div class="description-box rounded-lg p-4">
+                    <h3 class="font-semibold text-lg mb-2">Key Achievements</h3>
+                    <ul class="space-y-1 text-sm">
+                        <li><i class="fas fa-check text-green-600 mr-2"></i>Fixed 8/9 failing API endpoints</li>
+                        <li><i class="fas fa-check text-green-600 mr-2"></i>Implemented nginx proxy routing</li>
+                        <li><i class="fas fa-check text-green-600 mr-2"></i>Added persistent volume mounts</li>
+                        <li><i class="fas fa-check text-green-600 mr-2"></i>Created professional REST API</li>
+                        <li><i class="fas fa-check text-green-600 mr-2"></i>Established health monitoring</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Container Management Commands -->
+    <section class="max-w-7xl mx-auto px-6 py-4">
+        <div class="category-header text-white rounded-t-xl px-6 py-4">
+            <h2 class="text-2xl font-bold">
+                <i class="fas fa-box mr-3"></i>Container Management Commands
+            </h2>
+        </div>
+        <div class="bg-white rounded-b-xl shadow-lg p-6 mb-8">
+            
+            <div class="grid gap-4">
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker ps</code>
+                        <span class="bg-green-500 text-xs px-2 py-1 rounded">Basic</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">List running containers</div>
+                    <div class="text-gray-300 text-sm">Shows currently active containers with their status, ports, and names. Essential for checking service health.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker ps -a</code>
+                        <span class="bg-blue-500 text-xs px-2 py-1 rounded">Extended</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">List all containers (including stopped)</div>
+                    <div class="text-gray-300 text-sm">Shows all containers regardless of status. Useful for debugging failed services and checking container history.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker restart &lt;container&gt;</code>
+                        <span class="bg-yellow-500 text-xs px-2 py-1 rounded">Control</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Restart a specific container</div>
+                    <div class="text-gray-300 text-sm">Stops and starts a container. Used extensively for applying configuration changes (nginx-proxy, ffcreator-service).</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker stop &lt;container&gt;</code>
+                        <span class="bg-red-500 text-xs px-2 py-1 rounded">Control</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Stop a running container gracefully</div>
+                    <div class="text-gray-300 text-sm">Sends SIGTERM signal to container processes. Preferred method for controlled shutdown.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker start &lt;container&gt;</code>
+                        <span class="bg-green-500 text-xs px-2 py-1 rounded">Control</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Start a stopped container</div>
+                    <div class="text-gray-300 text-sm">Starts an existing container that was previously stopped. Maintains container configuration and data.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Container Inspection & Debugging -->
+    <section class="max-w-7xl mx-auto px-6 py-4">
+        <div class="category-header text-white rounded-t-xl px-6 py-4">
+            <h2 class="text-2xl font-bold">
+                <i class="fas fa-search mr-3"></i>Container Inspection & Debugging
+            </h2>
+        </div>
+        <div class="bg-white rounded-b-xl shadow-lg p-6 mb-8">
+            
+            <div class="grid gap-4">
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker logs &lt;container&gt;</code>
+                        <span class="bg-purple-500 text-xs px-2 py-1 rounded">Debug</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">View container logs</div>
+                    <div class="text-gray-300 text-sm">Essential for debugging. Used extensively to check FFCreator startup logs and error messages.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker logs --tail 10 &lt;container&gt;</code>
+                        <span class="bg-purple-500 text-xs px-2 py-1 rounded">Debug</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">View last 10 log entries</div>
+                    <div class="text-gray-300 text-sm">Quickly check recent container activity. Used frequently during troubleshooting sessions.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker logs -f &lt;container&gt;</code>
+                        <span class="bg-purple-500 text-xs px-2 py-1 rounded">Debug</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Follow log output in real-time</div>
+                    <div class="text-gray-300 text-sm">Stream live logs for monitoring container behavior during testing and debugging.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker inspect &lt;container&gt;</code>
+                        <span class="bg-indigo-500 text-xs px-2 py-1 rounded">Analysis</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Get detailed container information</div>
+                    <div class="text-gray-300 text-sm">Returns complete JSON metadata including network settings, mounts, and environment variables. Critical for nginx-proxy analysis.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker exec -it &lt;container&gt; /bin/sh</code>
+                        <span class="bg-orange-500 text-xs px-2 py-1 rounded">Interactive</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Enter container shell interactively</div>
+                    <div class="text-gray-300 text-sm">Access container's internal shell for file editing, process management, and direct debugging. Used extensively for FFCreator server.js modifications.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker exec &lt;container&gt; &lt;command&gt;</code>
+                        <span class="bg-orange-500 text-xs px-2 py-1 rounded">Execute</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Execute command in running container</div>
+                    <div class="text-gray-300 text-sm">Run single commands without interactive shell. Used for file operations, process checks, and quick diagnostics.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- File Operations -->
+    <section class="max-w-7xl mx-auto px-6 py-4">
+        <div class="category-header text-white rounded-t-xl px-6 py-4">
+            <h2 class="text-2xl font-bold">
+                <i class="fas fa-file-code mr-3"></i>File Operations & Management
+            </h2>
+        </div>
+        <div class="bg-white rounded-b-xl shadow-lg p-6 mb-8">
+            
+            <div class="grid gap-4">
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker cp &lt;file&gt; &lt;container&gt;:&lt;path&gt;</code>
+                        <span class="bg-teal-500 text-xs px-2 py-1 rounded">Transfer</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Copy file from host to container</div>
+                    <div class="text-gray-300 text-sm">Transfer configuration files into containers. Used to deploy fixed server.js to ffcreator-service.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker cp &lt;container&gt;:&lt;path&gt; &lt;file&gt;</code>
+                        <span class="bg-teal-500 text-xs px-2 py-1 rounded">Transfer</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Copy file from container to host</div>
+                    <div class="text-gray-300 text-sm">Extract files from containers for backup or analysis. Used to backup original server.js files.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker exec &lt;container&gt; cat /app/file.js</code>
+                        <span class="bg-gray-500 text-xs px-2 py-1 rounded">View</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">View file contents inside container</div>
+                    <div class="text-gray-300 text-sm">Inspect configuration files without copying. Used extensively to examine server.js and package.json contents.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker exec &lt;container&gt; ls -la /app</code>
+                        <span class="bg-gray-500 text-xs px-2 py-1 rounded">List</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">List directory contents in container</div>
+                    <div class="text-gray-300 text-sm">Explore container file system structure. Used to understand FFCreator's directory layout and identify configuration files.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker exec &lt;container&gt; grep -n "pattern" file</code>
+                        <span class="bg-gray-500 text-xs px-2 py-1 rounded">Search</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Search for patterns in container files</div>
+                    <div class="text-gray-300 text-sm">Find specific code patterns or configurations. Used to locate API endpoint definitions and identify duplicates.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Network Management -->
+    <section class="max-w-7xl mx-auto px-6 py-4">
+        <div class="category-header text-white rounded-t-xl px-6 py-4">
+            <h2 class="text-2xl font-bold">
+                <i class="fas fa-network-wired mr-3"></i>Network Management
+            </h2>
+        </div>
+        <div class="bg-white rounded-b-xl shadow-lg p-6 mb-8">
+            
+            <div class="grid gap-4">
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker network ls</code>
+                        <span class="bg-cyan-500 text-xs px-2 py-1 rounded">Network</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">List Docker networks</div>
+                    <div class="text-gray-300 text-sm">View available networks including custom bridge networks used by docker-compose services.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker network inspect &lt;network&gt;</code>
+                        <span class="bg-cyan-500 text-xs px-2 py-1 rounded">Network</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Inspect network configuration</div>
+                    <div class="text-gray-300 text-sim">Analyze network topology and container connectivity. Used to understand n8n-ai-studio network structure.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker exec &lt;container&gt; nslookup &lt;service&gt;</code>
+                        <span class="bg-cyan-500 text-xs px-2 py-1 rounded">DNS</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Test DNS resolution between containers</div>
+                    <div class="text-gray-300 text-sm">Verify container name resolution. Used to test nginx-proxy connectivity to ffcreator-service.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker exec &lt;container&gt; ping &lt;service&gt;</code>
+                        <span class="bg-cyan-500 text-xs px-2 py-1 rounded">Connectivity</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Test network connectivity between containers</div>
+                    <div class="text-gray-300 text-sm">Verify network routing and connectivity. Essential for troubleshooting service communication issues.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Docker Compose Commands -->
+    <section class="max-w-7xl mx-auto px-6 py-4">
+        <div class="category-header text-white rounded-t-xl px-6 py-4">
+            <h2 class="text-2xl font-bold">
+                <i class="fas fa-layer-group mr-3"></i>Docker Compose Commands
+            </h2>
+        </div>
+        <div class="bg-white rounded-b-xl shadow-lg p-6 mb-8">
+            
+            <div class="grid gap-4">
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker-compose up -d</code>
+                        <span class="bg-green-600 text-xs px-2 py-1 rounded">Startup</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Start all services in detached mode</div>
+                    <div class="text-gray-300 text-sm">Launch the entire N8N AI Studio stack. Creates networks, volumes, and starts all containers as defined in docker-compose.yml.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker-compose restart &lt;service&gt;</code>
+                        <span class="bg-yellow-600 text-xs px-2 py-1 rounded">Control</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Restart specific service</div>
+                    <div class="text-gray-300 text-sm">Restart individual services without affecting others. Used frequently for ffcreator service after configuration changes.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker-compose logs &lt;service&gt;</code>
+                        <span class="bg-purple-600 text-xs px-2 py-1 rounded">Debug</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">View service logs</div>
+                    <div class="text-gray-300 text-sm">Access logs for specific services managed by docker-compose. More convenient than using container names.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker-compose ps</code>
+                        <span class="bg-blue-600 text-xs px-2 py-1 rounded">Status</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Show compose project status</div>
+                    <div class="text-gray-300 text-sm">Display status of all services in the compose project with health checks and port mappings.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker-compose down</code>
+                        <span class="bg-red-600 text-xs px-2 py-1 rounded">Shutdown</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Stop and remove all containers</div>
+                    <div class="text-gray-300 text-sm">Gracefully shutdown entire stack. Removes containers but preserves volumes and networks.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Service-Specific Commands -->
+    <section class="max-w-7xl mx-auto px-6 py-4">
+        <div class="category-header text-white rounded-t-xl px-6 py-4">
+            <h2 class="text-2xl font-bold">
+                <i class="fas fa-cog mr-3"></i>Service-Specific Commands
+            </h2>
+        </div>
+        <div class="bg-white rounded-b-xl shadow-lg p-6 mb-8">
+            
+            <div class="grid gap-4">
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker exec nginx-proxy nginx -t</code>
+                        <span class="bg-green-600 text-xs px-2 py-1 rounded">Nginx</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Test nginx configuration syntax</div>
+                    <div class="text-gray-300 text-sm">Validate nginx.conf before restarting. Critical for preventing nginx startup failures after configuration changes.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker exec ffcreator-service node -c /app/server.js</code>
+                        <span class="bg-yellow-600 text-xs px-2 py-1 rounded">Node.js</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Check Node.js syntax</div>
+                    <div class="text-gray-300 text-sm">Validate JavaScript syntax before deployment. Used to catch syntax errors in FFCreator server.js modifications.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker exec ffcreator-service ps aux | grep node</code>
+                        <span class="bg-blue-600 text-xs px-2 py-1 rounded">Process</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Check running Node.js processes</div>
+                    <div class="text-gray-300 text-sm">Monitor Node.js server processes and their resource usage. Used to verify server startup and identify process issues.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker exec ffcreator-service pkill -f "node server.js"</code>
+                        <span class="bg-red-600 text-xs px-2 py-1 rounded">Process</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Kill Node.js server process</div>
+                    <div class="text-gray-300 text-sm">Terminate specific Node.js processes for manual restart. Used when configuration changes require process restart.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker exec ffcreator-service npm list express</code>
+                        <span class="bg-purple-600 text-xs px-2 py-1 rounded">Dependencies</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Check NPM package installation</div>
+                    <div class="text-gray-300 text-sm">Verify that required Node.js packages are installed. Used to confirm Express.js and other dependencies.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Testing Commands -->
+    <section class="max-w-7xl mx-auto px-6 py-4">
+        <div class="category-header text-white rounded-t-xl px-6 py-4">
+            <h2 class="text-2xl font-bold">
+                <i class="fas fa-flask mr-3"></i>API Testing & Validation
+            </h2>
+        </div>
+        <div class="bg-white rounded-b-xl shadow-lg p-6 mb-8">
+            
+            <div class="grid gap-4">
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">curl -s http://localhost:3001/health</code>
+                        <span class="bg-green-600 text-xs px-2 py-1 rounded">Health</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Test API health endpoint</div>
+                    <div class="text-gray-300 text-sm">Verify service health and get system information. Essential for monitoring FFCreator service status.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">curl -s -w "Status: %{http_code}\n" http://localhost:3001/api</code>
+                        <span class="bg-blue-600 text-xs px-2 py-1 rounded">Test</span>
+                    </div>
+                    <div class="text-green-200 text-sim mb-2">Test API endpoint with status code</div>
+                    <div class="text-gray-300 text-sm">Test API endpoints and capture HTTP status codes. Used extensively to verify endpoint functionality.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">curl -s http://localhost:3001/ | jq '.endpoints'</code>
+                        <span class="bg-purple-600 text-xs px-2 py-1 rounded">JSON</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Extract specific JSON fields</div>
+                    <div class="text-gray-300 text-sm">Parse JSON responses and extract specific data. Used to verify API endpoint listings and service information.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">curl -X POST http://localhost:3001/create-test-video</code>
+                        <span class="bg-orange-600 text-xs px-2 py-1 rounded">POST</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Test video creation endpoint</div>
+                    <div class="text-gray-300 text-sm">Test FFCreator's video generation functionality. Validates that the core video processing capability works correctly.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Troubleshooting Commands -->
+    <section class="max-w-7xl mx-auto px-6 py-4">
+        <div class="category-header text-white rounded-t-xl px-6 py-4">
+            <h2 class="text-2xl font-bold">
+                <i class="fas fa-tools mr-3"></i>Troubleshooting & Maintenance
+            </h2>
+        </div>
+        <div class="bg-white rounded-b-xl shadow-lg p-6 mb-8">
+            
+            <div class="grid gap-4">
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker system prune</code>
+                        <span class="bg-red-600 text-xs px-2 py-1 rounded">Cleanup</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Clean up unused Docker objects</div>
+                    <div class="text-gray-300 text-sm">Remove unused containers, networks, images, and volumes. Helps free up disk space and resolve conflicts.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker stats</code>
+                        <span class="bg-cyan-600 text-xs px-2 py-1 rounded">Monitor</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Monitor container resource usage</div>
+                    <div class="text-gray-300 text-sm">Real-time monitoring of CPU, memory, and network usage for all running containers.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker exec &lt;container&gt; df -h</code>
+                        <span class="bg-yellow-600 text-xs px-2 py-1 rounded">Storage</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Check container disk usage</div>
+                    <div class="text-gray-300 text-sm">Monitor filesystem usage within containers. Important for services that generate large files like FFCreator.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker exec &lt;container&gt; netstat -tlnp</code>
+                        <span class="bg-indigo-600 text-xs px-2 py-1 rounded">Network</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Check listening ports in container</div>
+                    <div class="text-gray-300 text-sm">Verify which ports are open and listening within containers. Used to confirm service port configurations.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker volume ls</code>
+                        <span class="bg-teal-600 text-xs px-2 py-1 rounded">Volume</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">List Docker volumes</div>
+                    <div class="text-gray-300 text-sm">View all Docker volumes for persistent data management. Important for understanding data persistence setup.</div>
+                </div>
+
+                <div class="command-box text-white rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="text-lg font-mono">docker inspect --format='{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' &lt;container&gt;</code>
+                        <span class="bg-pink-600 text-xs px-2 py-1 rounded">Network</span>
+                    </div>
+                    <div class="text-green-200 text-sm mb-2">Get container IP address</div>
+                    <div class="text-gray-300 text-sm">Extract specific network information using Go templates. Useful for debugging network connectivity issues.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Reference -->
+    <section class="max-w-7xl mx-auto px-6 py-4">
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                <i class="fas fa-rocket text-blue-600 mr-2"></i>Quick Reference - Project Commands
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="description-box rounded-lg p-4">
+                    <h3 class="font-semibold text-lg mb-3 text-green-700">
+                        <i class="fas fa-play-circle mr-2"></i>Common Startup Sequence
+                    </h3>
+                    <div class="space-y-2 text-sm font-mono">
+                        <div class="text-gray-700">1. docker-compose up -d</div>
+                        <div class="text-gray-700">2. docker ps</div>
+                        <div class="text-gray-700">3. docker logs nginx-proxy --tail 10</div>
+                        <div class="text-gray-700">4. curl http://localhost:3001/health</div>
+                    </div>
+                </div>
+                
+                <div class="description-box rounded-lg p-4">
+                    <h3 class="font-semibold text-lg mb-3 text-red-700">
+                        <i class="fas fa-bug mr-2"></i>Troubleshooting Sequence
+                    </h3>
+                    <div class="space-y-2 text-sm font-mono">
+                        <div class="text-gray-700">1. docker logs &lt;service&gt;</div>
+                        <div class="text-gray-700">2. docker exec -it &lt;service&gt; /bin/sh</div>
+                        <div class="text-gray-700">3. docker inspect &lt;service&gt;</div>
+                        <div class="text-gray-700">4. docker restart &lt;service&gt;</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                <h3 class="font-semibold text-blue-800 mb-2">
+                    <i class="fas fa-lightbulb mr-2"></i>Pro Tips
+                </h3>
+                <ul class="text-sm text-blue-700 space-y-1">
+                    <li>• Always test nginx configuration with <code class="bg-blue-100 px-1 rounded">nginx -t</code> before restarting</li>
+                    <li>• Use <code class="bg-blue-100 px-1 rounded">--tail</code> flag with logs to avoid overwhelming output</li>
+                    <li>• Keep backups of working configurations before making changes</li>
+                    <li>• Use <code class="bg-blue-100 px-1 rounded">docker-compose</code> commands when possible for service management</li>
+                    <li>• Check container health with <code class="bg-blue-100 px-1 rounded">/health</code> endpoints regularly</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 px-6 mt-12">
+        <div class="max-w-7xl mx-auto text-center">
+            <div class="mb-4">
+                <h3 class="text-xl font-bold mb-2">N8N AI Studio Project</h3>
+                <p class="text-gray-300">FFCreator API Implementation - Docker Commands Reference</p>
+            </div>
+            <div class="text-sm text-gray-400">
+                <p>This reference guide documents the Docker commands used in successfully implementing</p>
+                <p>a complete REST API for the FFCreator video processing service</p>
+            </div>
+            <div class="mt-4 text-xs text-gray-500">
+                <i class="fas fa-check-circle text-green-400 mr-1"></i>
+                Project Status: Complete - All 13 API endpoints functional
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+    <script id="html_badge_script1">
+        window.__genspark_remove_badge_link = "https://www.genspark.ai/api/html_badge/" +
+            "remove_badge?token=To%2FBnjzloZ3UfQdcSaYfDqYG5AEYprv4kbLQXZUHB32t7uLhPbuJmchmosdUDF28iDQ8uNzg124KYWUGyk0cobrvcNM1RoeQIeehSyme5vvkVZhlAVndHgrBjpVDmD44iKyVEujxiT1wxeuT9dHeaT2EuBrqF0rWb%2FXWEdqsaO6cl1SiDtDoMrg%2BCFMWuusGkeVEUEbQdHt0FE%2BHHxMo7FWgMVPHg1oRYXAtUEENt7%2F44%2Fr2b393ebYNQYNTZ07iTsQAGPUN72xPdvtsAlQVsNUSNtmpGnhlHqlaUdaq9%2BRGa7JtnCAdiYsL4QDsTwmGguvlOMkiPJSinE3XXz4qU8nhb9oDqFH8%2FZiBoLh3%2BugE3sz2GLwTKGv8O0%2B%2Bt%2BeIel5TrTie8kQvgrpFM3wJK%2FN%2BMkqKlUdMnbJi%2BQFatSYeWPcfpPRhxEoG7vSxDrFRp2C0IVeVVFweG0WKWB%2FgHoYLrPKIi1b4u1LS7ShBF6TZyk5Ul5Avkc1C5iI3FJaJo%2Bho0p8p2vfxfaMhMnUcvP4vha7r%2FfO720nZhAdIEVA%3D";
+        window.__genspark_locale = "en-US";
+        window.__genspark_token = "To/BnjzloZ3UfQdcSaYfDqYG5AEYprv4kbLQXZUHB32t7uLhPbuJmchmosdUDF28iDQ8uNzg124KYWUGyk0cobrvcNM1RoeQIeehSyme5vvkVZhlAVndHgrBjpVDmD44iKyVEujxiT1wxeuT9dHeaT2EuBrqF0rWb/XWEdqsaO6cl1SiDtDoMrg+CFMWuusGkeVEUEbQdHt0FE+HHxMo7FWgMVPHg1oRYXAtUEENt7/44/r2b393ebYNQYNTZ07iTsQAGPUN72xPdvtsAlQVsNUSNtmpGnhlHqlaUdaq9+RGa7JtnCAdiYsL4QDsTwmGguvlOMkiPJSinE3XXz4qU8nhb9oDqFH8/ZiBoLh3+ugE3sz2GLwTKGv8O0++t+eIel5TrTie8kQvgrpFM3wJK/N+MkqKlUdMnbJi+QFatSYeWPcfpPRhxEoG7vSxDrFRp2C0IVeVVFweG0WKWB/gHoYLrPKIi1b4u1LS7ShBF6TZyk5Ul5Avkc1C5iI3FJaJo+ho0p8p2vfxfaMhMnUcvP4vha7r/fO720nZhAdIEVA=";
+    </script>
+    
+    <script id="html_notice_dialog_script" src="https://www.genspark.ai/notice_dialog.js"></script>
+    

@@ -1,0 +1,39 @@
+{
+  "name": "Dot Marker Coloring Page Generator",
+  "nodes": [
+    {
+      "parameters": {
+        "values": {
+          "string": [
+            {"name": "subject", "value": "a cute cat"},
+            {"name": "activity_type", "value": "dot marker coloring page"},
+            {"name": "dot_size", "value": "6mm circles"},
+            {"name": "style_keywords", "value": "DotMarkerStyle, do-a-dot style, chunky dots for kids"}
+          ]
+        }
+      },
+      "name": "Set Dot Marker Parameters",
+      "type": "n8n-nodes-base.set",
+      "position": [240, 300]
+    },
+    {
+      "parameters": {
+        "jsCode": "const subject = $json.subject;\nconst dotSize = $json.dot_size;\nconst styleKeywords = $json.style_keywords;\n\nconst enhancedPrompt = `${subject} filled with large circular dots, ${$json.activity_type}, ${dotSize}, black outlines on white background, ${styleKeywords}, bingo dabber template, large circular dots inside shape, chunky markers for kids`;\n\nconst negativePrompt = 'small dots, tiny circles, fine details, realistic, photographic, colored, complex shading, pointillism, microscopic dots, overlapping dots';\n\nreturn {\n  enhanced_prompt: enhancedPrompt,\n  negative_prompt: negativePrompt,\n  subject_clean: subject.replace(/\\s+/g, '_')\n};"
+      },
+      "name": "Build Dot Marker Prompt",
+      "type": "n8n-nodes-base.code",
+      "position": [460, 300]
+    },
+    {
+      "parameters": {
+        "url": "http://comfyui-main:8188/prompt",
+        "sendBody": true,
+        "contentType": "json",
+        "body": "={\n  \"prompt\": {\n    \"1\": {\"inputs\": {\"ckpt_name\": \"sd_xl_base_1.0.safetensors\"}, \"class_type\": \"CheckpointLoaderSimple\"},\n    \"2\": {\"inputs\": {\"lora_name\": \"ColoringBookRedmond-V2.safetensors\", \"strength_model\": 0.7, \"strength_clip\": 0.7, \"model\": [\"1\", 0], \"clip\": [\"1\", 1]}, \"class_type\": \"LoraLoader\"},\n    \"3\": {\"inputs\": {\"text\": \"{{ $json.enhanced_prompt }}\", \"clip\": [\"2\", 1]}, \"class_type\": \"CLIPTextEncode\"},\n    \"4\": {\"inputs\": {\"text\": \"{{ $json.negative_prompt }}\", \"clip\": [\"2\", 1]}, \"class_type\": \"CLIPTextEncode\"},\n    \"5\": {\"inputs\": {\"width\": 1024, \"height\": 1024, \"batch_size\": 1}, \"class_type\": \"EmptyLatentImage\"},\n    \"6\": {\"inputs\": {\"seed\": 42, \"steps\": 25, \"cfg\": 9, \"sampler_name\": \"dpmpp_2m\", \"scheduler\": \"karras\", \"denoise\": 1, \"model\": [\"2\", 0], \"positive\": [\"3\", 0], \"negative\": [\"4\", 0], \"latent_image\": [\"5\", 0]}, \"class_type\": \"KSampler\"},\n    \"7\": {\"inputs\": {\"samples\": [\"6\", 0], \"vae\": [\"1\", 2]}, \"class_type\": \"VAEDecode\"},\n    \"8\": {\"inputs\": {\"filename_prefix\": \"dot_marker_{{ $json.subject_clean }}\", \"images\": [\"7\", 0]}, \"class_type\": \"SaveImage\"}\n  }\n}"
+      },
+      "name": "Generate Dot Marker Page",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [680, 300]
+    }
+  ]
+}

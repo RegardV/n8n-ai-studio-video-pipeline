@@ -1,0 +1,56 @@
+# =============================================================================
+# N8N AI Studio MCP Server - Production Dockerfile
+# =============================================================================
+FROM python:3.11-slim
+
+LABEL maintainer="N8N AI Studio"
+LABEL description="Claude MCP Server for N8N Multimodal Workflow Control"
+LABEL version="1.0.0"
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    wget \
+    jq \
+    git \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# Create non-root user for security
+RUN useradd --create-home --shell /bin/bash --uid 1000 mcp-user
+
+# Copy requirements first (for better Docker layer caching)
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY server.py .
+COPY health_check.py .
+
+# Create necessary directories and set permissions
+RUN mkdir -p /app/logs /app/config /app/templates && \
+    chown -R mcp-user:mcp-user /app
+
+# Switch to non-root user
+USER mcp-user
+
+# Expose ports
+EXPOSE 8765 3000
+
+# Set environment variables
+ENV PYTHONPATH=/app
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONDONTWRITEBYTECODE=1
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=15s --retries=3 \
+    CMD python /app/health_check.py
+
+# Default command - runs the MCP server
+CMD ["python", "server.py"]

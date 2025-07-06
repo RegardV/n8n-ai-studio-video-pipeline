@@ -1,0 +1,307 @@
+# =============================================================================
+# N8N AI Studio - Comprehensive Git Ignore Configuration
+# =============================================================================
+
+# =============================================================================
+# SENSITIVE DATA & SECRETS
+# =============================================================================
+.env
+.env.local
+.env.production
+.env.*
+secrets/
+Secrets/
+ssl/*.key
+ssl/*.pem
+ssl/private/
+*.key
+*.pem
+
+# =============================================================================
+# DOCUMENTATION & DATA COLLECTION (DDC)
+# =============================================================================
+DDC/
+
+# =============================================================================
+# SCRIPTS (potentially sensitive)
+# =============================================================================
+scripts/
+
+# =============================================================================
+# LARGE MODEL FILES & BACKUPS
+# =============================================================================
+backupModels/
+/models/
+persistent-data/comfyui/basedir/models/checkpoints/*.ckpt
+persistent-data/comfyui/basedir/models/checkpoints/*.safetensors
+persistent-data/comfyui/basedir/models/checkpoints/SD1.5/
+persistent-data/comfyui/basedir/models/loras/
+persistent-data/comfyui/basedir/models/embeddings/
+persistent-data/comfyui/basedir/models/style_models/
+persistent-data/comfyui/basedir/models/upscale_models/
+persistent-data/comfyui/basedir/models/diffusion_models/
+persistent-data/comfyui/run/
+persistent-data/kokoro/models/
+persistent-data/kokoro/audio/
+persistent-data/kokoro/cache/
+
+# =============================================================================
+# COMFYUI SPECIFIC (from your current setup)
+# =============================================================================
+__pycache__/
+*.py[cod]
+/output/
+/input/
+!/input/example.png
+/temp/
+/custom_nodes/
+!custom_nodes/example_node.py.example
+extra_model_paths.yaml
+/web/extensions/*
+!/web/extensions/logging.js.example
+!/web/extensions/core/
+/tests-ui/data/object_info.json
+/user/
+web_custom_versions/
+openapi.yaml
+filtered-openapi.yaml
+uv.lock
+
+# =============================================================================
+# RUNTIME DATA (recreated automatically)
+# =============================================================================
+postgres-data/
+redis-data/
+n8n-data/
+persistent-data/ffcreator-db/
+persistent-data/videos/
+persistent-data/ffcreator-cache/
+temp/
+temp-processing/
+
+# =============================================================================
+# GENERATED FILES & LOGS
+# =============================================================================
+*.log
+test_report_*.json
+container_health_check.log
+docker-images-inventory.log
+n8n_endpoint_tester.js
+ddc_extractor.sh
+ddc_validator.sh
+model_verification.sh
+container_health_check.sh
+
+# =============================================================================
+# NODE.JS & NPM
+# =============================================================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.npm
+.yarn-integrity
+
+# =============================================================================
+# PYTHON VIRTUAL ENVIRONMENTS
+# =============================================================================
+venv/
+.venv/
+env/
+.env/
+ENV/
+env.bak/
+venv.bak/
+
+# =============================================================================
+# IDE & EDITOR FILES
+# =============================================================================
+.vscode/
+.idea/
+/.vs
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# =============================================================================
+# OS GENERATED FILES
+# =============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*~
+desktop.ini
+
+# =============================================================================
+# DOCKER & CONTAINERS
+# =============================================================================
+.dockerignore
+docker-compose.override.yml
+.docker/
+
+# =============================================================================
+# TEMPORARY & CACHE FILES
+# =============================================================================
+*.tmp
+*.temp
+.cache/
+.pytest_cache/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.hypothesis/
+
+# =============================================================================
+# BUILD & DISTRIBUTION
+# =============================================================================
+build/
+dist/
+*.egg-info/
+.eggs/
+.tox/
+.nox/
+
+# =============================================================================
+# JUPYTER NOTEBOOKS
+# =============================================================================
+.ipynb_checkpoints
+*/.ipynb_checkpoints/*
+
+# =============================================================================
+# WINDOWS SPECIFIC
+# =============================================================================
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msm
+*.msp
+*.lnk
+
+# =============================================================================
+# LINUX SPECIFIC
+# =============================================================================
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# =============================================================================
+# MACOS SPECIFIC
+# =============================================================================
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# =============================================================================
+# BACKUP FILES
+# =============================================================================
+*.backup
+*.bak
+*.orig
+*.rej
+*~
+.#*
+#*#
+
+# =============================================================================
+# SECURITY & CERTIFICATES
+# =============================================================================
+*.p12
+*.pfx
+*.crt
+*.csr
+*.der
+*.cert
+*.ca-bundle
+*.keychain
+
+# =============================================================================
+# CLOUD & SYNC FILES
+# =============================================================================
+.dropbox
+.dropbox.attr
+.google-drive-download-metadata
+.syncthing.*
+
+# =============================================================================
+# ARCHIVE FILES (often large)
+# =============================================================================
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.gz
+*.bz2
+*.xz
+
+# =============================================================================
+# MEDIA FILES (can be large)
+# =============================================================================
+*.mp4
+*.avi
+*.mov
+*.wmv
+*.flv
+*.webm
+*.mkv
+*.m4v
+*.wav
+*.mp3
+*.flac
+*.aac
+*.ogg
+*.wma
+
+# =============================================================================
+# EXCEPTION RULES (files to keep despite above patterns)
+# =============================================================================
+# Keep example files
+!examples/**
+!docs/**/*.png
+!docs/**/*.jpg
+!docs/**/*.gif
+
+# Keep placeholder files for directory structure
+!.gitkeep
+!.placeholder
+
+# Keep essential configuration examples
+!.env.example
+!docker-compose.example.yml
+
+# Keep small demo/test files
+!test-assets/*.png
+!test-assets/*.jpg

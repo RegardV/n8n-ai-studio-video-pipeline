@@ -1,0 +1,192 @@
+# =============================================================================
+# FFCreator GPU-Accelerated Video Processing - Production Dockerfile
+# =============================================================================
+# Based on your working baseline, minimal additions for Canvas reliability
+# Compatible with Docker secrets and enhanced GPU configuration
+# =============================================================================
+
+# Use Ubuntu-based Node image for Canvas compatibility
+FROM node:18-bullseye
+
+# Prevent interactive prompts during package installation
+ENV DEBIAN_FRONTEND=noninteractive
+
+# =============================================================================
+# SYSTEM DEPENDENCIES INSTALLATION
+# =============================================================================
+RUN apt-get update && apt-get install -y \
+    # Graphics and OpenGL libraries
+    libgl1-mesa-glx \
+    libglu1-mesa \
+    libglx0 \
+    libxrender1 \
+    libxext6 \
+    libx11-6 \
+    xvfb \
+    x11-xserver-utils \
+    mesa-utils \
+    \
+    # FFmpeg and media libraries
+    ffmpeg \
+    \
+    # Build tools for native modules
+    build-essential \
+    python3 \
+    python3-pip \
+    pkg-config \
+    \
+    # Canvas and Cairo dependencies
+    libcairo2-dev \
+    libpango1.0-dev \
+    libjpeg62-turbo-dev \
+    libgif-dev \
+    librsvg2-dev \
+    libpixman-1-dev \
+    libfontconfig1-dev \
+    libfreetype6-dev \
+    \
+    # Additional utilities for production
+    curl \
+    wget \
+    unzip \
+    netcat-openbsd \
+    \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# =============================================================================
+# ENVIRONMENT CONFIGURATION
+# =============================================================================
+# Set display environment for headless OpenGL rendering
+ENV DISPLAY=:99
+ENV NVIDIA_VISIBLE_DEVICES=0
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility,video,graphics
+
+# OpenGL optimization settings
+ENV __GL_SYNC_TO_VBLANK=0
+ENV __GL_SYNC_DISPLAY_DEVICE=DP-0
+ENV LIBGL_ALWAYS_INDIRECT=0
+
+# Node.js production optimizations
+ENV NODE_ENV=production
+ENV NODE_OPTIONS=--max-old-space-size=8192
+
+# FFCreator optimization settings
+ENV FFCREATOR_PARALLEL_JOBS=2
+ENV FFCREATOR_WORKER_THREADS=8
+ENV FFCREATOR_CACHE_SIZE=2048
+
+# Canvas compilation flags
+ENV CANVAS_PREBUILT=false
+ENV BUILD_LIBVIPS=false
+
+# =============================================================================
+# APPLICATION SETUP
+# =============================================================================
+# Use the existing user with UID 1000 (node user exists in node:18-bullseye)
+# Set working directory
+WORKDIR /app
+
+# Copy package files with proper ownership to existing node user
+COPY --chown=node:node package*.json ./
+
+# =============================================================================
+# DEPENDENCY INSTALLATION
+# =============================================================================
+# Install Node.js dependencies with Canvas build optimization
+RUN npm install --production --unsafe-perm \
+    && npm rebuild canvas --build-from-source \
+    && npm cache clean --force \
+    && chown -R node:node /app
+
+# Copy application code with proper ownership to node user
+COPY --chown=node:node server.js ./
+
+# =============================================================================
+# DIRECTORY STRUCTURE
+# =============================================================================
+RUN mkdir -p \
+    /app/videos \
+    /app/cache \
+    /app/temp \
+    /app/assets \
+    /app/ai-assets \
+    /app/tts-audio \
+    /app/logs \
+    && chown -R node:node /app \
+    && chmod -R 755 /app
+
+# =============================================================================
+# HEALTH CHECK CONFIGURATION
+# =============================================================================
+HEALTHCHECK --interval=60s --timeout=30s --start-period=120s --retries=3 \
+    CMD curl -f http://localhost:3001/health || exit 1
+
+# =============================================================================
+# SECURITY CONFIGURATION
+# =============================================================================
+# Switch to existing node user for security
+USER node
+
+# Expose application port
+EXPOSE 3001
+
+# =============================================================================
+# STARTUP COMMAND
+# =============================================================================
+CMD ["sh", "-c", "\
+  echo '🚀 Starting FFCreator GPU Service...' && \
+  echo '📊 System Information:' && \
+  echo '  - Node.js: $(node --version)' && \
+  echo '  - User: $(whoami)' && \
+  echo '  - Working Directory: $(pwd)' && \
+  \
+  echo '🖥️  Starting virtual display server...' && \
+  Xvfb :99 -screen 0 1920x1080x24 -ac +extension GLX +extension RENDER -noreset -dpi 96 > /dev/null 2>&1 & \
+  XVFB_PID=$! && \
+  \
+  echo '⏳ Waiting for display server...' && \
+  sleep 3 && \
+  \
+  echo '🚀 Starting FFCreator API server on port 3001...' && \
+  \
+  trap 'echo \"🛑 Shutting down FFCreator service...\"; kill $XVFB_PID 2>/dev/null; exit 0' TERM INT && \
+  \
+  node server.js \
+"]
+
+# =============================================================================
+# DOCKERFILE METADATA
+# =============================================================================
+LABEL maintainer="N8N AI Studio Team"
+LABEL version="2.1.0"
+LABEL description="GPU-accelerated FFCreator video processing service"
+LABEL gpu.required="true"
+LABEL security.level="production"
+
+# =============================================================================
+# PRODUCTION READY FEATURES:
+# =============================================================================
+# 
+# 🔧 CANVAS COMPILATION:
+# ✅ Proper Cairo and Pango dependencies for Debian Bullseye
+# ✅ pkg-config for library detection
+# ✅ Canvas rebuild with --build-from-source
+# ✅ All required graphics libraries
+# 
+# 🎮 GPU OPTIMIZATION:
+# ✅ OpenGL libraries for headless rendering
+# ✅ Virtual display server (Xvfb)
+# ✅ NVIDIA runtime compatibility
+# 
+# 🔒 SECURITY:
+# ✅ Non-root user execution
+# ✅ Proper file permissions
+# ✅ Health check monitoring
+# 
+# 📊 MONITORING:
+# ✅ Startup logging
+# ✅ Graceful shutdown handling
+# ✅ Health check endpoint
+# 
+# =============================================================================
