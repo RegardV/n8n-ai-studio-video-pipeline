@@ -14,10 +14,13 @@
 - **🔄 N8N Workflow Automation** - Visual workflow builder with enterprise-grade automation
 - **🎨 ComfyUI Image Generation** - Stable Diffusion AI with 15GB+ models and GPU acceleration
 - **🎤 Kokoro TTS** - Premium text-to-speech with 67 voices across 8 languages
-- **🎬 FFCreator Video Processing** - GPU-accelerated video composition with Canvas rendering
+- **🎬 FFCreator Video Processing** - GPU-accelerated video composition with Canvas rendering and native Custom built javascript templates
 - **🔒 Enterprise Security** - Docker secrets, SSL encryption, Nginx reverse proxy with rate limiting
 - **📊 Complete Monitoring** - Health checks, centralized logging, and performance metrics
 - **🌐 API-First Design** - RESTful APIs for all services with comprehensive N8N integration
+
+  ✨ **Phase 2 planning**
+  - **🎬 FFCreator Video: Completion of custom built javascript video assebly templates (nearest examples for reference only createOmate, Banner bear, Json2Video) Templates was built and added but not really practical as its running inside the container meaning to add or edit, rebuilding te contianer is required.[Next Phase technical planning]()
 
 ## 🏗️ Architecture
 
