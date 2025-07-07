@@ -10,7 +10,7 @@
 *Date: July 6, 2025 | Status: ✅ Production Ready*
 
 ## ✨ Features
-
+local docker network running these containers:
 - **🔄 N8N Workflow Automation** - Visual workflow builder with enterprise-grade automation
 - **🎨 ComfyUI Image Generation** - Stable Diffusion AI with 15GB+ models and GPU acceleration
 - **🎤 Kokoro TTS** - Premium text-to-speech with 67 voices across 8 languages
