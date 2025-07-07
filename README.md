@@ -24,7 +24,7 @@
 
  - ** 🎬 Subtitle display** with word highlighting and configurable options. [ TTS-Agnostic Karaoke Subtitle System - Technical Implementation](https://github.com/RegardV/n8n-ai-studio-video-pipeline/blob/main/docs/karaoke-text-implementation-planning.md)
 
-- **🎤 Kokoro TTS- Replacement with Chatterbox** kokoro is good but chatterbox offers better ewmotional toning.[Replacement procedure technical writeup]()
+- **🎤 Kokoro TTS- Replacement with Chatterbox** kokoro is good but chatterbox offers better ewmotional toning.[Kokoro Service Removal & Chatterbox Integration Guide](https://github.com/RegardV/n8n-ai-studio-video-pipeline/blob/main/docs/Kokoro%20Service%20Removal%20%26%20Chatterbox%20Integration%20Guide.md)
 
 ## 🏗️ Architecture
 
