@@ -20,7 +20,11 @@
 - **🌐 API-First Design** - RESTful APIs for all services with comprehensive N8N integration
 
   ✨ **Phase 2 planning**
-  - **🎬 FFCreator Video: Completion of custom built javascript video assebly templates (nearest examples for reference only createOmate, Banner bear, Json2Video) Templates was built and added but not really practical as its running inside the container meaning to add or edit, rebuilding te contianer is required.[Next Phase technical planning]()
+  - **🎬 FFCreator Video templates**: Completion of custom built javascript video assebly templates (nearest examples for reference only createOmate, Banner bear, Json2Video) Templates was built and added but not really practical as its running inside the container meaning to add or edit, rebuilding te contianer is required.[Next Phase technical planning](https://github.com/RegardV/n8n-ai-studio-video-pipeline/blob/main/docs/FFcreator-Phase2.md)
+
+ - ** 🎬 Subtitle display** with word highlighting and configurable options. [ TTS-Agnostic Karaoke Subtitle System - Technical Implementation](https://github.com/RegardV/n8n-ai-studio-video-pipeline/blob/main/docs/karaoke-text-implementation-planning.md)
+
+- **🎤 Kokoro TTS- Replacement with Chatterbox** kokoro is good but chatterbox offers better ewmotional toning.[Replacement procedure technical writeup]()
 
 ## 🏗️ Architecture
 
