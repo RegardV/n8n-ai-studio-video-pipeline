@@ -1,4 +1,4 @@
-# 🤖 N8N AI Studio
+# 🤖 N8N AI Studio - video Pipeline
 > **Production-Ready AI Automation Platform** with ComfyUI, Kokoro TTS, and FFCreator
 
 [![License: ISC](https://img.shields.io/badge/License-ISC-blue.svg)](https://opensource.org/licenses/ISC)
